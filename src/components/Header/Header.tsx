@@ -26,7 +26,7 @@ const Header = () => {
         }}
         className='animate-in-top'
       >
-        Avisos al Portal
+        Template-pjt
       </Typography>
     </Stack>
   );

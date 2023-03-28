@@ -1,23 +1,46 @@
-import { lazy, Suspense } from 'react';
+import { useLayoutEffect, Suspense } from 'react';
+import { useAppDispatch, useAppSelector } from './app/hook';
 
-import { Container } from '@mui/material';
+import { CssBaseline, ThemeProvider } from '@mui/material';
 
-import Footer from './components/Footer/Footer';
-import Header from './components/Header/Header';
+import LazyLoadingSpinner from './components/Spinner/LazyLoadingSpinner';
 
-const Main = lazy(() => import('./views/Main'));
+import { themes } from './constants/themes';
+
+import { changeMeta } from './helpers/changeMeta';
+import { setTheme } from './features/globalData';
+
+import useTheme from './hooks/useTheme';
+
+import Main from './views/Main';
 
 const App = () => {
+  const theme = useTheme();
+  const themeOption = useAppSelector((state) => state.globalData.theme);
+
+  const dispatch = useAppDispatch();
+
+  // Automatic theme detection, before rendering
+  useLayoutEffect(() => {
+    if (
+      window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches &&
+      !localStorage.getItem('theme')
+    ) {
+      dispatch(setTheme(themes.DARK));
+    }
+
+    // Change theme-color meta tag based on theme
+    changeMeta(themeOption);
+  }, [dispatch]);
+
   return (
-    <Container className='content'>
-      <Header />
-      <main>
-        <Suspense fallback={null}>
-          <Main />
-        </Suspense>
-      </main>
-      <Footer />
-    </Container>
+    <ThemeProvider theme={theme}>
+      <Suspense fallback={<LazyLoadingSpinner />}>
+        <CssBaseline />
+        <Main />
+      </Suspense>
+    </ThemeProvider>
   );
 };
 
