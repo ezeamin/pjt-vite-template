@@ -9,6 +9,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 .content {
@@ -208,5 +209,11 @@ footer {
 
 ::-webkit-scrollbar {
   height: 5px;
-  width: 3px;
+  width: 5px;
+  background-color: #8f8f8f;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ffffff;
+  border-radius: 10px;
 }
