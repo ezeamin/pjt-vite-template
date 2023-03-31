@@ -20,7 +20,7 @@ const Header = () => {
       {/* Add if routing is needed */}
       {/* <Link to={paths.HOME}> */}
       <img
-        src='/img/logos/logo-corte-2019.png'
+        src='/img/logos/logo-corte.png'
         alt='logo poder judicial de tucuman'
         className='animate-in-top'
         height={isPortrait ? '44.6px' : '71.39px'}
