@@ -18,7 +18,7 @@ const darkTheme = {
     contrastText: '#dddddd',
   },
   background: {
-    default: '#222222',
+    default: '#363636',
   },
   white: {
     main: '#2e2e2e',
