@@ -6,7 +6,7 @@ import { comboBoxLabels } from '../../constants/comboBoxLabels';
 
 import { ErrorToast } from '../../helpers/customSwal';
 
-import { ComboBoxProps } from '../interface';
+import { ComboBoxProps } from '../interface/custom';
 
 // ComboBox normalizado con los formatos que se trabajan en la aplicacion
 // Se recomienda SIEMPRE usar este componente para los ComboBox autocompletables

@@ -4,7 +4,7 @@ import { Alert } from '@mui/material';
 
 import { themes } from '../../constants/themes';
 
-import { CustomAlertProps, VariantType } from '../interface/alert';
+import { CustomAlertProps, VariantType } from '../interface/custom';
 
 // Alert que en modo oscuro se coloca con "outlined"
 // se agrega la animacion de entrada, pero puede ser sobrescrita

@@ -5,7 +5,7 @@ import { CustomIconButtonProps } from '../interface/custom';
 // IconButton con tooltip y tamaño normalizado
 
 const CustomIconButton = (props: CustomIconButtonProps) => {
-  const { title, icon, sx, ...args } = props;
+  const { title, icon, sx, ...other } = props;
 
   return (
     <Tooltip title={title}>
@@ -15,7 +15,7 @@ const CustomIconButton = (props: CustomIconButtonProps) => {
             height: '40px',
             ...sx,
           }}
-          {...args}
+          {...other}
         >
           {icon}
         </IconButton>
