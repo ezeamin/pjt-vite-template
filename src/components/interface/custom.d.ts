@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import type { SxProps } from '@mui/material';
 
-import { AnyProp } from '../../interface/globalTypes';
+import { AnyProp, BasicList } from '../../interface/globalTypes';
 
 // Custom Clickable Row
 
@@ -57,6 +57,7 @@ export interface ComboBoxProps extends BasicProps {
   error: InitialValues.error;
   errorMessage?: string;
   helperText?: string;
+  label: string;
   list?: ComboBoxListType[];
   required?: boolean;
   setError?: SetError;

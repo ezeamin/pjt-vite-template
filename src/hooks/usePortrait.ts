@@ -1,10 +1,13 @@
-import { useMediaQuery } from '@mui/material';
+import { useMediaQuery, useTheme } from '@mui/material';
 
-// Detecta dinámicamente si la pantalla tiene un tamaño menor a @param (=sm)
+// Detects if viewport is smaller than @param (=sm)
 
-const usePortrait = (size: string = 'sm'): boolean => {
-  //@ts-ignore
-  return useMediaQuery((theme: any) => theme.breakpoints.down(size));
+type sizeParams = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+
+const usePortrait = (size: sizeParams = 'sm'): boolean => {
+  const theme = useTheme();
+
+  return useMediaQuery(theme.breakpoints.down(size));
 };
 
 export default usePortrait;

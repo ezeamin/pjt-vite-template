@@ -1,4 +1,4 @@
-import { SweetAlertOptions } from 'sweetalert2';
+import { SweetAlertOptions, SweetAlertResult } from 'sweetalert2';
 
 import { CustomSwalArgs } from './interface';
 
@@ -32,7 +32,9 @@ const customSwal = async (args: CustomSwalArgs) => {
   });
 };
 
-const customToast: any = async (args: SweetAlertOptions<any, any>) => {
+const customToast = async (
+  args: SweetAlertOptions<unknown, unknown>
+): Promise<SweetAlertResult<unknown>> => {
   let color;
 
   switch (args.icon) {
@@ -69,7 +71,7 @@ const customToast: any = async (args: SweetAlertOptions<any, any>) => {
   return swal.fire({ ...args });
 };
 
-const ErrorToast = (text: string, time: number = 3000) => {
+const ErrorToast = (text: string, time = 3000) => {
   return customToast({
     icon: 'error',
     title: text,
@@ -77,7 +79,7 @@ const ErrorToast = (text: string, time: number = 3000) => {
   });
 };
 
-const SuccessToast = (text: string, time: number = 3000) => {
+const SuccessToast = (text: string, time = 3000) => {
   return customToast({
     icon: 'success',
     title: text,

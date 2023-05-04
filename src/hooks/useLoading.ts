@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../app/hook';
 
 import { setLoadingBackdropOpened } from '../features/loading';
 
-const useLoading = (isLoading: boolean = false, isUninitialized: boolean = true) => {
+const useLoading = (isLoading = false, isUninitialized = true) => {
   const dispatch = useAppDispatch();
 
   const pagination = useAppSelector((state) => state.pagination);

@@ -6,6 +6,6 @@ export interface Response {
 
 export interface ResponseAdapterProps {
   data: Response;
-  adapter: Function;
+  adapter: (unknown) => object;
   adapterData?: object;
 }

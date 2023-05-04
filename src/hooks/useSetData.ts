@@ -2,9 +2,9 @@ import { useCallback, useState } from 'react';
 
 import dayjs from 'dayjs';
 
-import { useSetDataType } from './interface';
+import { StateType, useSetDataType } from './interface';
 
-import { initialValues } from '../constants/filter/initialValues';
+// import { initialValues } from '../constants/filter/initialValues';
 
 // Setter genérico para filtros de busqueda en modales
 // Muy similar a un useState pero con la particularidad de que
@@ -19,10 +19,9 @@ const useSetData: useSetDataType = (props) => {
 
   const setData = useCallback(
     (value: string | number | dayjs.Dayjs, name: string, field: string) => {
-      setFormData((state: any) => ({
+      setFormData((state: StateType) => ({
         ...state,
-        [name]: { ...state[name], [field]: value },
-        // [name]: { ...state[name as keyof StateType], [field]: value },
+        [name]: { ...state[name as keyof StateType], [field]: value },
       }));
     },
     [setFormData]
@@ -34,14 +33,12 @@ const useSetData: useSetDataType = (props) => {
       const name = argName;
       const value = argValue;
 
-      setFormData((state: any) => ({
+      setFormData((state: StateType) => ({
         ...state,
         [name]: {
-          ...state[name],
-          // ...state[name as keyof StateType],
+          ...state[name as keyof StateType],
           error: !!value,
-          extra: { ...state[name].extra, message },
-          // extra: { ...state[name as keyof StateType].extra, message },
+          extra: { ...state[name as keyof StateType].extra, message },
         },
       }));
     },
@@ -50,9 +47,10 @@ const useSetData: useSetDataType = (props) => {
 
   const resetField = useCallback(
     (name: string) => {
-      setFormData((state: any) => ({
+      setFormData((state: StateType) => ({
         ...state,
-        [name]: initialValues,
+        [name]: 'TODO: Reset with initial values',
+        // [name]: initialValues,
       }));
     },
     [setFormData]

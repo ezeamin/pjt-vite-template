@@ -1,8 +1,8 @@
-import { memo, useEffect, useState } from 'react';
+import { memo } from 'react';
 
 import { Autocomplete, FormControl, TextField } from '@mui/material';
 
-import { comboBoxLabels } from '../../constants/comboBoxLabels';
+// import { comboBoxLabels } from '../../constants/comboBoxLabels';
 
 import { ErrorToast } from '../../helpers/customSwal';
 
@@ -13,34 +13,36 @@ import { ComboBoxProps } from '../interface/custom';
 
 const ComboBoxItem = memo((props: ComboBoxProps) => {
   const {
+    className = '',
     disabled = false,
     error,
     errorMessage,
+    label,
     list = [],
     required = false,
-    setData,
-    setError = () => {},
+    setValue,
+    // setError,
     type,
     value = null,
     ...other
   } = props;
 
-  const [label, setLabel] = useState({ label: '', type: '' });
-
-  useEffect(() => {
-    if (type) {
-      const labelType = comboBoxLabels.find((label) => label.type === type);
-
-      labelType && setLabel(labelType);
-    }
-  }, [type]);
-
   const handleChange = (newValue: string) => {
-    // @ts-ignore
-    const id = list.find(({ description }) => description === newValue).id;
-    setData(newValue, label.type, 'value');
-    setData(id, label.type, 'id');
-    setError(label.type, false);
+    if (newValue && list) {
+      const selectedItem = list.find((item) => item.description === newValue);
+
+      if (selectedItem) {
+        setValue(newValue, type, 'value');
+        setValue(selectedItem.id, type, 'id');
+        // setError(label.type, false);
+      }
+    } else {
+      // TODO: Import initialValues from constants/filter
+
+      // setValue(initialValues.value, type, 'value');
+      // setValue(initialValues.id, type, 'id');
+      // setError(label.type, false);
+    }
   };
 
   const handleClick = () => {
@@ -61,16 +63,17 @@ const ComboBoxItem = memo((props: ComboBoxProps) => {
         onChange={(__e, newValue) => {
           handleChange(newValue);
         }}
-        // @ts-ignore
         options={list.map((item) => item.description)}
         renderInput={(params) => (
           <TextField
             {...params}
+            className={className}
             data-testid={other['data-testid'] || undefined}
             disabled={list.length === 0 || disabled}
             error={error}
-            label={required ? `${label?.label} *` : label?.label}
+            label={label}
             onClick={handleClick}
+            required={required}
           />
         )}
         value={value}
@@ -78,5 +81,7 @@ const ComboBoxItem = memo((props: ComboBoxProps) => {
     </FormControl>
   );
 });
+
+ComboBoxItem.displayName = 'ComboBoxItem';
 
 export default ComboBoxItem;

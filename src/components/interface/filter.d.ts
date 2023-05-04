@@ -1,10 +1,8 @@
 import { InitialValue, SetValue } from '.';
 
-import { initialValues } from '../../constants/filterInitialValues';
+import { AnyProp } from '../../interface/globalTypes';
 
-import { setDataProps } from '../../hooks/interface';
-
-export interface DateProps {
+export interface DateProps extends AnyProp {
   dateError?: boolean;
   disableFuture?: boolean;
   label: string;
@@ -15,19 +13,17 @@ export interface DateProps {
   type: string;
   value: InitialValue;
   className: string;
-  [key: string]: any;
 }
 
-export interface DescriptionProps {
+export interface DescriptionProps extends AnyProp {
   label?: string;
   setValue: SetValue;
   sx?: object;
   value: InitialValue;
   className: string;
-  [key: string]: any;
 }
 
-export interface ProceedingProps {
+export interface ProceedingProps extends AnyProp {
   disabled?: boolean;
   disabledMsg?: string;
   helperText?: string;
@@ -36,22 +32,19 @@ export interface ProceedingProps {
   sx?: object;
   value: InitialValue;
   className: string;
-  [key: string]: any;
 }
 
-export interface ResolutionProps {
+export interface ResolutionProps extends AnyProp {
   label?: string;
   setValue: SetValue;
   sx?: object;
   value: InitialValue;
   className: string;
-  [key: string]: any;
 }
 
-export interface TypeProps {
+export interface TypeProps extends AnyProp {
   setValue: SetValue;
   sx?: object;
   value: InitialValue;
   className: string;
-  [key: string]: any;
 }

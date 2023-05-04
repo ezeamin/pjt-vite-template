@@ -1,5 +1,5 @@
 export interface AnyProp {
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export interface BasicList {
@@ -14,7 +14,7 @@ export interface BasicList {
 export interface Response {
   success: boolean;
   message: string;
-  data: any;
+  data: object;
 }
 
 // ----------------------------------------------

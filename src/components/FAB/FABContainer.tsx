@@ -41,12 +41,14 @@ const FABContainer = () => {
       <FAB
         icon={themeIcon}
         color='primary'
+        title='Cambiar tema'
         handleClick={handleChangeTheme}
         data-testid={DTI(DTI_LIST.BUTTON(DTI_LIST.ACTIONS.TOGGLE_THEME))}
       />
       <FAB
         icon={<KeyboardArrowUpRounded />}
         color='primary'
+        title='Ir arriba'
         handleClick={handleScroll}
         data-testid={DTI(DTI_LIST.BUTTON(DTI_LIST.ACTIONS.GO_TO_TOP))}
       />

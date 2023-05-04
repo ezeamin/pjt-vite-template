@@ -1,16 +1,17 @@
 import { Dispatch, SetStateAction } from 'react';
 
 import { SetValue } from '../../components/interface';
-import { resolutionLabels } from '../../constants/filter/labels';
 
 import { InitialValues } from '../../constants/interface';
 
+// TODO: Replace when created
 export type setDataProps = {
-  fromDate: InitialValues;
+  someKey: InitialValues;
+  /*fromDate: InitialValues;
   resolution: InitialValues;
   text: InitialValues;
   toDate: InitialValues;
-  type: InitialValues;
+  type: InitialValues;*/
 };
 
 type setDataType = SetValue;
@@ -25,3 +26,5 @@ type resetFieldType = (name: string) => void;
 export type useSetDataType = (
   props: setDataProps
 ) => [setDataProps, setDataType, setErrorType, setFormDataType, resetFieldType];
+
+export type StateType = setDataProps;

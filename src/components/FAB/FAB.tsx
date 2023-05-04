@@ -1,6 +1,6 @@
 import { Fab } from '@mui/material';
 
-import { FABProps } from './types';
+import { FABProps } from '../interface/fab';
 
 const FAB = (props: FABProps) => {
   const { color = 'primary', icon, handleClick, ...other } = props;
