@@ -10,6 +10,8 @@ import { initialValues } from '../constants/filter/initialValues';
 // Muy similar a un useState pero con la particularidad de que
 // permite modificar campo a campo de una manera integrada
 
+// TODO: Create StateType interface based on initialValues, then replace all any with StateType
+
 const useSetData: useSetDataType = (props) => {
   const initialState = props;
 
@@ -20,6 +22,7 @@ const useSetData: useSetDataType = (props) => {
       setFormData((state: any) => ({
         ...state,
         [name]: { ...state[name], [field]: value },
+        // [name]: { ...state[name as keyof StateType], [field]: value },
       }));
     },
     [setFormData]
@@ -27,22 +30,18 @@ const useSetData: useSetDataType = (props) => {
 
   const setError = useCallback(
     (argName: string, argValue: string | boolean, argMsg?: string) => {
-      let message = argMsg;
-      let name = argName;
-      let value = argValue;
-
-      // Si el primer parámetro es un booleano, se asume que el segundo parámetro es el nombre del campo y se invierten
-      if (typeof argName === 'boolean' && typeof argValue === 'string') {
-        name = argValue;
-        value = argName;
-      }
+      const message = argMsg;
+      const name = argName;
+      const value = argValue;
 
       setFormData((state: any) => ({
         ...state,
         [name]: {
           ...state[name],
+          // ...state[name as keyof StateType],
           error: !!value,
-          // extra: { ...state[name].extra, message },
+          extra: { ...state[name].extra, message },
+          // extra: { ...state[name as keyof StateType].extra, message },
         },
       }));
     },
@@ -51,7 +50,7 @@ const useSetData: useSetDataType = (props) => {
 
   const resetField = useCallback(
     (name: string) => {
-      setFormData((state) => ({
+      setFormData((state: any) => ({
         ...state,
         [name]: initialValues,
       }));

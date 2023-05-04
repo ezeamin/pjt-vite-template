@@ -1,33 +1,27 @@
 // @ts-nocheck
 
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../app/hook';
 
-import { createTheme } from '@mui/material/styles';
+import { Palette, createTheme } from '@mui/material/styles';
+import { OverridesStyleRules } from '@mui/material/styles/overrides';
 
 import { themes } from '../constants/themes';
 
 import lightTheme from '../themes/light';
 import darkTheme from '../themes/dark';
 
-import { RootState } from '../app/store';
-
 const defaultBorderRadius = '0.75rem';
 
 const useTheme = () => {
-  const themeOption = useSelector((state: RootState) => state.globalData.theme);
+  const themeOption = useAppSelector((state) => state.globalData.theme);
 
   return createTheme({
     palette: {
-      mode: themeOption,
+      mode: themeOption as Palette['mode'],
       ...(themeOption === themes.LIGHT ? lightTheme : darkTheme),
     },
     typography: {
-      root: {
-        FontFamily: 'Roboto Slab',
-      },
-      h5: {
-        // fontSize
-      },
+      fontFamily: 'Roboto Slab',
       body1: {
         fontSize: '1.1rem',
         fontWeight: '400',
@@ -46,16 +40,16 @@ const useTheme = () => {
       },
       MuiPaper: {
         styleOverrides: {
-          fullyRounded: {
+          root: {
             borderRadius: defaultBorderRadius,
-            boxShadow:
-              '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
           },
-          roundedBottom: {
-            borderRadius: '0 0 1rem 1rem',
-            boxShadow:
-              '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
-          },
+          ...({
+            roundedBottom: {
+              borderRadius: '0 0 1rem 1rem',
+              boxShadow:
+                '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
+            },
+          } as Partial<OverridesStyleRules<'root', 'MuiPaper'>>),
         },
       },
       MuiTextField: {
@@ -69,7 +63,7 @@ const useTheme = () => {
       },
       MuiSelect: {
         styleOverrides: {
-          root: {
+          select: {
             borderRadius: defaultBorderRadius,
           },
         },
@@ -85,6 +79,13 @@ const useTheme = () => {
         styleOverrides: {
           paper: {
             borderRadius: defaultBorderRadius,
+          },
+        },
+      },
+      MuiBackdrop: {
+        styleOverrides: {
+          root: {
+            backdropFilter: 'blur(2px)',
           },
         },
       },
