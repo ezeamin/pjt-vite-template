@@ -1,10 +1,16 @@
-// no types for react-error-boundary
-
 import { Component, ReactNode } from 'react';
 
 import ErrorPage from './ErrorPage';
 
-class ErrorBoundary extends Component {
+interface ErrorBoundaryProps {
+  children?: ReactNode;
+}
+
+interface ErrorBoundaryState {
+  hasError: boolean;
+}
+
+class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: { children?: ReactNode }) {
     super(props);
     this.state = { hasError: false };
@@ -22,13 +28,11 @@ class ErrorBoundary extends Component {
   }
 
   render() {
-    // @ts-ignore
     if (this.state.hasError) {
       // You can render any custom fallback UI
       return <ErrorPage />;
     }
 
-    // @ts-ignore
     return this.props.children;
   }
 }

@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import { useAppSelector } from '../app/hook';
 
 import { Palette, createTheme } from '@mui/material/styles';
@@ -63,7 +61,8 @@ const useTheme = () => {
       },
       MuiSelect: {
         styleOverrides: {
-          select: {
+          // @ts-expect-error - root element has no types, but needs to be like this
+          root: {
             borderRadius: defaultBorderRadius,
           },
         },
